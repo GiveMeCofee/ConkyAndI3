@@ -17,7 +17,7 @@ double_buffer no
 background no
 
 ## Update interval in seconds
-update_interval 0.5
+update_interval 11
 
 ## This is the number of times Conky will update before quitting.
 ## Set to zero to run forever.
@@ -50,19 +50,7 @@ TEXT
 
 # JSON for i3bar
 [
-${if_match "${exec ~/bin/spotify/spotify-control getStatus}"!="Spotify is not running"} \
-    {
-        "full_text": " ${scroll 30 \
-${exec ~/bin/spotify/spotify-control getArtist} - \
-${exec ~/bin/spotify/spotify-control getTitle}} ",
-        "color":
-            ${if_match "${exec ~/bin/spotify/spotify-control getStatus}"=="Playing"}"\#00CC00"${else}
-                ${if_match "${exec ~/bin/spotify/spotify-control getStatus}"=="Paused"}"\#FF8000"${else}
-                    "\#CC0000"
-                ${endif}
-            ${endif} 
-    },
-${endif}
+
     {
         "full_text": " HDD: ${fs_free /home} "
     },
@@ -91,10 +79,10 @@ ${endif}
             ${endif} 
     },
     {
-        "full_text": " Temp: ${exec sensors | awk '/Physical id 0:/ {print $4}' }°C "
+        "full_text": " Temp: ${exec sensors | awk '/Physical id 0:/ {print $4}' } "
     },
     {
-        "full_text": " Up: ${uptime_short} "
+        "full_text": " Up: ${uptime %H:%M:%S} "
     },
     {
         "full_text": " C ",
@@ -110,11 +98,9 @@ ${endif}
                 "\#CC0000"
             ${endif}
     },
+    
     {
-        "full_text": " Vol: ${amixer -c 0 get Master | egrep -o -e 100% -e \1?([1-9])?[0-9]%} "
-    },
-    {
-        "full_text": " ${time %a %d/%m/%y} ${time %H:%M:%S} ",
+        "full_text": " ${time %a %y/%m/%d} ${time %H:%M:%S} ",
         "color": ${if_match ${time %u}>5}"\#00CC00"${else}"\#CC0000"${endif}
     }
 ],
