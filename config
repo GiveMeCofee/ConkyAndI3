@@ -27,7 +27,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -120,6 +120,15 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+
+# solarized (borders)
+# clientclass border backgr. text indicator
+client.focused $baseB0 $green $baseB3 $blue
+# client.focused_inactive $baseB0 $cyan $baseB2 $violet
+client.focused_inactive $baseB0 $baseA2 $baseB1 $baseA1
+client.unfocused $baseB0 $baseA2 $baseB1 $baseA1
+client.urgent $baseB0 $yellow $baseB3 $orange
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -142,13 +151,35 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        
+        
 }
+
+client.focused #0088CC #0088CC #ffffff #dddddd
+client.focused_inactive #333333 #333333 #888888 #292d2e
+client.unfocused #333333 #333333 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
 
 bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-		position top
-        status_command ~/.i3/conky-i3
+	status_command i3status -c ~/.i3/i3status.conf
+	mode dock
+	font DejaVu Sans
+	position top
+	
+	colors {
+		background		#171717
+		statusline		#FFFFCC
+		separator		#373737
+		focused_workspace	#171717	#9c0200 #FFFFCC
+		active_workspace	#171717 #171717 #FFFFCC
+		inactive_workspace	#171717 #171717 #FFFFCC
+		urgent_workspace	#2f343a #900000 #FFFFCC 
+		
+	}
 }
+
+
