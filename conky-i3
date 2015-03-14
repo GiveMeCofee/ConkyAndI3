@@ -9,5 +9,9 @@ echo '['
 # We send an empty first array of blocks to make the loop simpler:
 echo '[],'
 
+
+
 # Now send blocks with information forever:
-exec conky -c ~/.i3/conkyrc
+exec conky -c ~/.i3/conky-test
+
+exec xrandr --output HDMI1 --primary --right-of eDP1
